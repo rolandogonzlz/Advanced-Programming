@@ -1,11 +1,17 @@
-Before submitting this file, make sure that there are no more TODO
-placeholders remaining in the file (and remove this comment too).
-
 Marriage Pact
 -------------
 
 Q1. It is your choice to use either an ordered or unordered set. In a few sentences, what are some of the tradeoffs between the two? Additionally, please give an example (that has not been shown in lecture) of a valid hash function that could be used to hash student names for an unordered set.
-A1. TODO
+
+
+A1. An ordered set (std::set) keeps elements sorted and allows efficient in-order iteration, but operations like insertion and lookup have a time complexity of 
+O(logn) due to its balanced tree structure. In contrast, an unordered set (std::unordered_set) provides average  O(1) lookup and insertion using a hash table, although collisions can degrade performance to 
+O(n) in the worst case.
+
 
 Q2. Note that we are saving pointers to names in the queue, not names themselves. Why might this be desired in this problem? What happens if the original set where the names are stored goes out of scope and the pointers are referenced?
-A2. TODO
+
+A2. Storing pointers instead of copies of names improves performance and memory efficiency by avoiding duplication of potentially long strings. Using pointers in std::queue ensures that all references point to the same instance of each name, reducing unnecessary memory usage.
+
+Potential issue:
+If the original set of names goes out of scope, the pointers in the queue become dangling, leading to undefined behavior when accessed. To prevent this, the set should persist as long as the queue is in use, or alternatively, copies of the names should be stored instead of pointers.
