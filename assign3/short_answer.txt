@@ -1,11 +1,17 @@
-Before submitting this file, make sure that there are no more TODO
-placeholders remaining in the file (and remove this comment too).
+
 
 Make a Class
 ------------
 
 Q1. What’s const-correctness and why is it important?
-A1. TODO
+A1. Const-correctness refers to the practice of using the const keyword appropriately to indicate which variables, function parameters, and member functions should not be modified. This helps prevent unintended modifications of data, improves code readability, and enables optimizations by the compiler. It also makes the code safer and easier to debug by enforcing immutability where needed.
+
+
 
 Q2. Is your class const-correct? How do you know?
-A2. TODO
+A2. Yes, my class is const-correct. I ensured this by:
+	Declaring getter functions (getNombre(), getEdad(), getMembresia()) as 	const, meaning they do not modify the state of the object.
+	
+	Using const std::string& as a parameter in functions that only read 	values, avoiding unnecessary copies.
+
+	Marking the mostrarInfo() method as const, ensuring that it does not 	modify any member variables of the class.
