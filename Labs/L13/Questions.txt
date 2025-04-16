@@ -1,0 +1,39 @@
+Questions:
+
+• What is the output of this program?
+	v1 size: 0
+	v2 size: 4
+	v3 size: 4
+• Why does v1.size() return 0 after the move?
+ because the move constructor of std::vector transfers the internal buffer from v1 to v3.
+• What does std::move do?
+std::move is a cast that tells the compiler to treat the object as an rvalue (temporary object), which allows the move constructor or move assignment operator to be called instead of the copy constructor.
+• Why is v1 still in a valid but unspecified state?
+Because the C++ Standard guarantees that a moved-from object must remain in a valid state such that it can be safely destructed or reassigned, but it doesn't guarantee the contents.
+
+Questions: 
+• What constructors and assignments are called and when? 
+	Constructor is called for b1 and b4.
+	Copy constructor for b2 = b1.
+	Move constructor for b3 = std::move(b1).
+	Copy assignment for b4 = b2.
+	Move assignment for b4 = std::move(b2).
+
+• What happens to the source object after a move? 
+	The source object (like b1 or b2 after std::move) is still valid but in a moved-	from state: Its data pointer is nullptr. Its size is set to 0.
+	
+• What would happen if you didn’t define the move constructor/assignment?
+In some cases, if your class manages resources and copying is expensive or disabled, using std::move would not compile correctly or cause double deletes if not handled properly
+
+			Part 5: Summary
+Questions
+• What did you learn about move semantics?
+    Move semantics allow the efficient transfer of resources (like memory, file handles,      etc.) from one object to another without deep copying.
+Using std::move enables us to avoid unnecessary heap allocations and reduces runtime overhead.
+
+• In what kinds of projects do you think this would matter?
+    Multimedia applications: like video/image processing, where large buffers or files are handled.
+
+• What are some risks of using std::move incorrectly?
+Using std::move on an object you still intend to use can lead to undefined behavior or logical errors, because the object might be left empty or invalid.
+
